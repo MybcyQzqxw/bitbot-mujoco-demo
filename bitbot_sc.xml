@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bitbot>
     <backend settings_file="setting.json"/>
-    <!-- <mujoco file="./models/mjmodel.xml"/> -->
     <mujoco file="./models/bhr8_20dof.xml"/>
     <logger path="./log"/>
     <logger level="debug"/>
