@@ -9,7 +9,7 @@
 int main(int argc, char const *argv[])
 {
   // 定义kernel对象，参数为配置文件
-  Kernel kernel("../../bitbot_pendulum.xml");
+  Kernel kernel("../../bitbot_sc.xml");
 
   // 注册Config函数
   kernel.RegisterConfigFunc(&ConfigFunc);
@@ -18,15 +18,15 @@ int main(int argc, char const *argv[])
 
   // 注册event
   kernel.RegisterEvent("waiting", static_cast<bitbot::StateId>(Events::Wait), &EventWait, true);
-  kernel.RegisterEvent("test", static_cast<bitbot::StateId>(Events::Test), &EventTest);
-  kernel.RegisterEvent("add", static_cast<bitbot::StateId>(Events::Add), &EventAdd, true);
-  kernel.RegisterEvent("minus", static_cast<bitbot::StateId>(Events::Minus), &EventMinus, true);
+  kernel.RegisterEvent("init_pos", static_cast<bitbot::StateId>(Events::InitPos), &EventInitPos);
+  kernel.RegisterEvent("to_fall_pos1", static_cast<bitbot::StateId>(Events::ToFallPos1), &EventToFallPos1, true);
+  kernel.RegisterEvent("to_fall_pos2", static_cast<bitbot::StateId>(Events::ToFallPos2), &EventToFallPos2, true);
 
   // 注册state
-  kernel.RegisterState("waiting", static_cast<bitbot::StateId>(States::Waiting), &StateWaiting, {
-    static_cast<bitbot::StateId>(Events::Test)
-  });
-  kernel.RegisterState("joint_test", static_cast<bitbot::StateId>(States::JointSinPos), &StateJointSinPos, {});
+  kernel.RegisterState("waiting", static_cast<bitbot::StateId>(States::Waiting), &StateWaiting, {static_cast<bitbot::StateId>(Events::InitPos), static_cast<bitbot::StateId>(Events::ToFallPos1), static_cast<bitbot::StateId>(Events::ToFallPos2)});
+  kernel.RegisterState("init_pos", static_cast<bitbot::StateId>(States::InitPos), &StateInitPos, {static_cast<bitbot::StateId>(Events::ToFallPos1), static_cast<bitbot::StateId>(Events::ToFallPos2)});
+  kernel.RegisterState("to_fall_pos1", static_cast<bitbot::StateId>(States::ToFallPos1), &StateToFallPos1, {});
+  kernel.RegisterState("to_fall_pos2", static_cast<bitbot::StateId>(States::ToFallPos2), &StateToFallPos2, {});
 
   // 设置用户的第一个state
   kernel.SetFirstState(static_cast<bitbot::StateId>(States::Waiting));

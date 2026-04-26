@@ -1,6 +1,10 @@
 {
   "control": [
     {
+      "event": "start",
+      "kb_key": "8"
+    },
+    {
       "event": "enable_record",
       "kb_key": "m"
     },
@@ -9,23 +13,22 @@
       "kb_key": " "
     },
     {
-      "event": "start",
-      "kb_key": "8"
-    },
-    {
-      "event": "test",
-      "kb_key": "t"
-    },
-    {
       "event": "waiting",
       "kb_key": "5"
     },
     {
-      "event": "add",
+      "event": "init_pos",
+      "label": "复位",
+      "kb_key": "p"
+    },
+    {
+      "event": "to_fall_pos1",
+      "label": "摔倒1",
       "kb_key": "1"
     },
     {
-      "event": "minus",
+      "event": "to_fall_pos2",
+      "label": "摔倒2",
       "kb_key": "2"
     }
   ]
